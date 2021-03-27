@@ -1,0 +1,43 @@
+body {
+  font-family: "Times New Roman";
+}
+
+.main-div {
+  padding-top: 2%;
+  padding-bottom: 8%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white;
+  height: 100%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.graph1 {
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 300px;
+}
+
+.graph2 {
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 300px;
+}
+
+.map {
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 300px;
+}
+
+.livedata {
+  background-color: #F5F5F5;
+  width: 100%;
+  height: 300px;
+}
