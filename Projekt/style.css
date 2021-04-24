@@ -44,3 +44,20 @@ body {
   height: auto;
   text-align: center;
 }
+
+/* Start Map CSS */
+
+#container {
+    height: 500px;
+    min-width: 310px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: gray;
+}
+
+/* End Map CSS */
