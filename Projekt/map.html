@@ -10,12 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
-    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
-
     <title>WEBP Projekt TAMM</title>
   </head>
 
@@ -46,128 +40,496 @@
   <!-- Start Seiteninhalt -->
   <div class="main-div">
     <h1>Play with the map</h1>
-    <div class="map">
-      <div id="container_map">
-        <div class="loading">
-          <i class="icon-spinner icon-spin icon-large"></i>
-          Loading data from Google Spreadsheets...
-        </div>
-      </div>
-    </div>
+    <div id="chart-container"></div>
   </div>
 
-  <script type="text/javascript">
-  // Load the data from a Google Spreadsheet
-  // https://docs.google.com/spreadsheets/d/1WBx3mRqiomXk_ks1a5sEAtJGvYukguhAkcCuRDrY1L0/pubhtml
-
-  Highcharts.data({
-  googleSpreadsheetKey: '1WBx3mRqiomXk_ks1a5sEAtJGvYukguhAkcCuRDrY1L0',
-
-  // Custom handler when the spreadsheet is parsed
-  parsed: function (columns) {
-
-      // Read the columns into the data array
-      var data = [];
-      Highcharts.each(columns[0], function (code, i) {
-          data.push({
-              code: code.toUpperCase(),
-              value: parseFloat(columns[2][i]),
-              name: columns[1][i]
-          });
-      });
-
-      // Initiate the chart
-      Highcharts.mapChart('container_map', {
+  <script>
+  const dataSource = {
+    chart: {
+      caption: "Average Annual Population Growth",
+      subcaption: "Click on a continent to see trend from 1955-2015",
+      numbersuffix: "%",
+      includevalueinlabels: "1",
+      labelsepchar: ": ",
+      entityfillhovercolor: "#FFF9C4",
+      theme: "fusion"
+    },
+    colorrange: {
+      minvalue: "0",
+      code: "#FFE0B2",
+      gradient: "1",
+      color: [
+        {
+          minvalue: "0.5",
+          maxvalue: "1.0",
+          color: "#FFD74D"
+        },
+        {
+          minvalue: "1.0",
+          maxvalue: "2.0",
+          color: "#FB8C00"
+        },
+        {
+          minvalue: "2.0",
+          maxvalue: "3.0",
+          color: "#E65100"
+        }
+      ]
+    },
+    data: [
+      {
+        id: "NA",
+        value: ".82",
+        showlabel: "1",
+        link: "newchart-json-NAM"
+      },
+      {
+        id: "SA",
+        value: "2.04",
+        showlabel: "1",
+        link: "newchart-json-SAM"
+      },
+      {
+        id: "AS",
+        value: "1.78",
+        showlabel: "1",
+        link: "newchart-json-ASI"
+      },
+      {
+        id: "EU",
+        value: ".40",
+        showlabel: "1",
+        link: "newchart-json-EUP"
+      },
+      {
+        id: "AF",
+        value: "2.58",
+        showlabel: "1",
+        link: "newchart-json-AFC"
+      },
+      {
+        id: "AU",
+        value: "1.30",
+        showlabel: "1",
+        link: "newchart-json-AUS"
+      }
+    ],
+    linkeddata: [
+      {
+        id: "NAM",
+        linkedchart: {
           chart: {
-              map: 'custom/world',
-              borderWidth: 1
+            caption: "Average Annual Population Growth - North America",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            palettecolors: "FFD74D",
+            theme: "fusion"
           },
-
-          colors: ['rgba(19,64,117,0.05)', 'rgba(19,64,117,0.2)', 'rgba(19,64,117,0.4)',
-              'rgba(19,64,117,0.5)', 'rgba(19,64,117,0.6)', 'rgba(19,64,117,0.8)', 'rgba(19,64,117,1)'],
-
-          title: {
-              text: 'Population density by country (/km²)'
+          data: [
+            {
+              label: "1955",
+              value: "1.5078"
+            },
+            {
+              label: "1960",
+              value: "1.5502"
+            },
+            {
+              label: "1965",
+              value: "1.3121"
+            },
+            {
+              label: "1970",
+              value: "0.8648"
+            },
+            {
+              label: "1975",
+              value: "0.6402"
+            },
+            {
+              label: "1980",
+              value: "0.62"
+            },
+            {
+              label: "1985",
+              value: "0.6748"
+            },
+            {
+              label: "1990",
+              value: "0.6882"
+            },
+            {
+              label: "1995",
+              value: "0.6804"
+            },
+            {
+              label: "2000",
+              value: "0.5627"
+            },
+            {
+              label: "2005",
+              value: "0.5373"
+            },
+            {
+              label: "2010",
+              value: "0.5536"
+            },
+            {
+              label: "2015",
+              value: "0.4291"
+            }
+          ]
+        }
+      },
+      {
+        id: "SAM",
+        linkedchart: {
+          chart: {
+            caption: "Average Annual Population Growth - South America",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            palettecolors: "E65100",
+            theme: "fusion"
           },
-
-          mapNavigation: {
-              enabled: true
+          data: [
+            {
+              label: "1955",
+              value: "2.6275"
+            },
+            {
+              label: "1960",
+              value: "2.6995"
+            },
+            {
+              label: "1965",
+              value: "2.757"
+            },
+            {
+              label: "1970",
+              value: "2.5376"
+            },
+            {
+              label: "1975",
+              value: "2.3431"
+            },
+            {
+              label: "1980",
+              value: "2.3261"
+            },
+            {
+              label: "1985",
+              value: "2.2036"
+            },
+            {
+              label: "1990",
+              value: "1.9611"
+            },
+            {
+              label: "1995",
+              value: "1.7184"
+            },
+            {
+              label: "2000",
+              value: "1.5965"
+            },
+            {
+              label: "2005",
+              value: "1.4482"
+            },
+            {
+              label: "2010",
+              value: "1.2031"
+            },
+            {
+              label: "2015",
+              value: "1.0698"
+            }
+          ]
+        }
+      },
+      {
+        id: "ASI",
+        linkedchart: {
+          chart: {
+            caption: "Average Annual Population Growth - Asia",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            theme: "fusion",
+            palettecolors: "FB8C00"
           },
-
-          legend: {
-              title: {
-                  text: 'Individuals per km²',
-                  style: {
-                      color: ( // theme
-                          Highcharts.defaultOptions &&
-                          Highcharts.defaultOptions.legend &&
-                          Highcharts.defaultOptions.legend.title &&
-                          Highcharts.defaultOptions.legend.title.style &&
-                          Highcharts.defaultOptions.legend.title.style.color
-                      ) || 'black'
-                  }
-              },
-              align: 'left',
-              verticalAlign: 'bottom',
-              floating: true,
-              layout: 'vertical',
-              valueDecimals: 0,
-              backgroundColor: ( // theme
-                  Highcharts.defaultOptions &&
-                  Highcharts.defaultOptions.legend &&
-                  Highcharts.defaultOptions.legend.backgroundColor
-              ) || 'rgba(255, 255, 255, 0.85)',
-              symbolRadius: 0,
-              symbolHeight: 14
+          data: [
+            {
+              label: "1955",
+              value: "1.9075"
+            },
+            {
+              label: "1960",
+              value: "1.8842"
+            },
+            {
+              label: "1965",
+              value: "2.1082"
+            },
+            {
+              label: "1970",
+              value: "2.4554"
+            },
+            {
+              label: "1975",
+              value: "2.3036"
+            },
+            {
+              label: "1980",
+              value: "1.9889"
+            },
+            {
+              label: "1985",
+              value: "1.9683"
+            },
+            {
+              label: "1990",
+              value: "2.0176"
+            },
+            {
+              label: "1995",
+              value: "1.6823"
+            },
+            {
+              label: "2000",
+              value: "1.3682"
+            },
+            {
+              label: "2005",
+              value: "1.2435"
+            },
+            {
+              label: "2010",
+              value: "1.1661"
+            },
+            {
+              label: "2015",
+              value: "1.0731"
+            }
+          ]
+        }
+      },
+      {
+        id: "EUP",
+        linkedchart: {
+          chart: {
+            caption: "Average Annual Population Growth - Europe",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            theme: "fusion",
+            palettecolors: "FFE0B2"
           },
-
-          colorAxis: {
-              dataClasses: [{
-                  to: 3
-              }, {
-                  from: 3,
-                  to: 10
-              }, {
-                  from: 10,
-                  to: 30
-              }, {
-                  from: 30,
-                  to: 100
-              }, {
-                  from: 100,
-                  to: 300
-              }, {
-                  from: 300,
-                  to: 1000
-              }, {
-                  from: 1000
-              }]
+          data: [
+            {
+              label: "1955",
+              value: "1.026"
+            },
+            {
+              label: "1960",
+              value: "1.0652"
+            },
+            {
+              label: "1965",
+              value: "0.9381"
+            },
+            {
+              label: "1970",
+              value: "0.6925"
+            },
+            {
+              label: "1975",
+              value: "0.54"
+            },
+            {
+              label: "1980",
+              value: "0.4218"
+            },
+            {
+              label: "1985",
+              value: "0.354"
+            },
+            {
+              label: "1990",
+              value: "0.2971"
+            },
+            {
+              label: "1995",
+              value: "0.0276"
+            },
+            {
+              label: "2000",
+              value: "-0.1301"
+            },
+            {
+              label: "2005",
+              value: "-0.1558"
+            },
+            {
+              label: "2010",
+              value: "-0.0576"
+            },
+            {
+              label: "2015",
+              value: "-0.0292"
+            }
+          ]
+        }
+      },
+      {
+        id: "AFC",
+        linkedchart: {
+          chart: {
+            caption: "Average Annual Population Growth - Africa",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            theme: "fusion",
+            palettecolors: "E65100"
           },
+          data: [
+            {
+              label: "1955",
+              value: "2.1242"
+            },
+            {
+              label: "1960",
+              value: "2.338"
+            },
+            {
+              label: "1965",
+              value: "2.5075"
+            },
+            {
+              label: "1970",
+              value: "2.5947"
+            },
+            {
+              label: "1975",
+              value: "2.7175"
+            },
+            {
+              label: "1980",
+              value: "2.8398"
+            },
+            {
+              label: "1985",
+              value: "2.8857"
+            },
+            {
+              label: "1990",
+              value: "2.8243"
+            },
+            {
+              label: "1995",
+              value: "2.6172"
+            },
+            {
+              label: "2000",
+              value: "2.5072"
+            },
+            {
+              label: "2005",
+              value: "2.4853"
+            },
+            {
+              label: "2010",
+              value: "2.5593"
+            },
+            {
+              label: "2015",
+              value: "2.6001"
+            }
+          ]
+        }
+      },
+      {
+        id: "AUS",
+        linkedchart: {
+          chart: {
+            caption: "Average Annual Population Growth - Oceania",
+            subcaption: "1955 - 2015",
+            yaxisname: "Growth",
+            numbersuffix: "%",
+            theme: "fusion",
+            palettecolors: "FB8C00"
+          },
+          data: [
+            {
+              label: "1955",
+              value: "1.511"
+            },
+            {
+              label: "1960",
+              value: "1.6045"
+            },
+            {
+              label: "1965",
+              value: "1.5578"
+            },
+            {
+              label: "1970",
+              value: "1.455"
+            },
+            {
+              label: "1975",
+              value: "1.4727"
+            },
+            {
+              label: "1980",
+              value: "1.2404"
+            },
+            {
+              label: "1985",
+              value: "1.2398"
+            },
+            {
+              label: "1990",
+              value: "1.1853"
+            },
+            {
+              label: "1995",
+              value: "1.2006"
+            },
+            {
+              label: "2000",
+              value: "1.1244"
+            },
+            {
+              label: "2005",
+              value: "1.0724"
+            },
+            {
+              label: "2010",
+              value: "1.1255"
+            },
+            {
+              label: "2015",
+              value: "1.0397"
+            }
+          ]
+        }
+      }
+    ]
+    };
 
-          series: [{
-              data: data,
-              joinBy: ['iso-a3', 'code'],
-              animation: true,
-              name: 'Population density',
-              states: {
-                  hover: {
-                      color: '#a4edba'
-                  }
-              },
-              tooltip: {
-                  valueSuffix: '/km²'
-              },
-              shadow: false
-          }]
-      });
-  },
-  error: function () {
-      document.getElementById('container_map').innerHTML = '<div class="loading">' +
-          '<i class="icon-frown icon-large"></i> ' +
-          'Error loading data from Google Spreadsheets' +
-          '</div>';
-  }
-});
+    FusionCharts.ready(function() {
+    var myChart = new FusionCharts({
+      type: "maps/world",
+      renderAt: "chart-container",
+      width: "100%",
+      height: "100%",
+      dataFormat: "json",
+      dataSource
+    }).render();
+    });
   </script>
 
   <footer class="footer mt-auto py-3 bg-light" class="footer">
