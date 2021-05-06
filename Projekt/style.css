@@ -20,14 +20,18 @@ body {
 
 .graph1 {
   margin-top: 50px;
-  width: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
   height: auto;
   text-align: center;
 }
 
 .graph2 {
-  background-color: #F5F5F5;
-  width: 100%;
+  margin-top: 100px;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
   height: 300px;
 }
 

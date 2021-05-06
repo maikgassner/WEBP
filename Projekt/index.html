@@ -51,10 +51,15 @@
     <div class="graph1">
       <canvas id="myChart"></canvas>
     </div>
+
+    <div class="graph2">
+      <canvas id="myChart1"></canvas>
+    </div>
   </div>
 
   <!-- Bubble Chart -->
   <script>
+  /* Graph1 */
     let myChart = document.getElementById('myChart').getContext('2d');
     let figure1 = new Chart(myChart,{
       type: 'bar',
@@ -71,6 +76,9 @@
       }
 
     })
+
+  /* Graph2 */
+  
   </script>
 
   <footer class="footer mt-auto py-3 bg-light" class="footer">
