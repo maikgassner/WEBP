@@ -13,6 +13,8 @@
     <!-- JS und CSS für Graphen -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/helpers.esm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 
     <title>WEBP Projekt TAMM</title>
   </head>
@@ -49,120 +51,162 @@
     </p>
 
     <div class="graph1">
-      <canvas id="bubble-chart"></canvas>
+      <h3>Top 10 der höchstverschuldeten Länder Europas - Stand 2017</h3>
+      <h5>(in Miliarden)</h5>
+      </br>
+      <canvas id="polar-chart"></canvas>
     </div>
 
     <div class="graph2">
-      <canvas id="mixed-chart"></canvas>
+      <h3>Top 10 der höchstverschuldeten Länder weltweit</h3>
+      <h5>(in Miliarden)</h5>
+      </br>
+      <canvas id="bubble-chart"></canvas>
     </div>
   </div>
 
   <script>
   /* Graph1 */
+  new Chart(document.getElementById("polar-chart"), {
+  type: 'polarArea',
+  data: {
+    labels: ["Griechenland", "Italien", "Portugal", "Belgien", "Spanien", "Zypern", "Frankreich", "Grossbritannien", "Österreich", "Kroatien"],
+    datasets: [
+      {
+        label: " ",
+        backgroundColor: ["#B0E2FF", "#4876ff","#f4a460","#9acd32","#f0e68c","#ff8c00","#ffdab9","#ffa500","#ffaeb9","#ab82ff"],
+        data: [181.8,131.8,125.7,103.4,98.4,97.5,96.8,87.5,78.6,77.8]
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: false,
+      text: ''
+    }
+  }
+  });
+
+
+  /* Graph2 */
     new Chart(document.getElementById("bubble-chart"), {
         type: 'bubble',
         data: {
-          labels: "Africa",
+          labels: "",
           datasets: [
             {
-              label: ["China"],
-              backgroundColor: "rgba(255,221,50,0.2)",
-              borderColor: "rgba(255,221,50,1)",
+              label: ["USA"],
+              backgroundColor: "rgba(176,226,255,0.2)",
+              borderColor: "rgba(176,226,255,1)",
               data: [{
-                x: 21269017,
+                x: 82.3,
                 y: 5.245,
-                r: 15
-              }]
-            }, {
-              label: ["Denmark"],
-              backgroundColor: "rgba(60,186,159,0.2)",
-              borderColor: "rgba(60,186,159,1)",
-              data: [{
-                x: 258702,
-                y: 7.526,
-                r: 10
-              }]
-            }, {
-              label: ["Germany"],
-              backgroundColor: "rgba(0,0,0,0.2)",
-              borderColor: "#000",
-              data: [{
-                x: 3979083,
-                y: 6.994,
-                r: 15
+                r: 39.31812699
               }]
             }, {
               label: ["Japan"],
+              backgroundColor: "rgba(72,118,255,0.2)",
+              borderColor: "rgba(72,118,255,1)",
+              data: [{
+                x: 223.8,
+                y: 23.97,
+                r: 26.73547705
+              }]
+            }, {
+              label: ["Italien"],
+              backgroundColor: "rgba(244,164,96,0.2)",
+              borderColor: "rgba(244,164,96,1)",
+              data: [{
+                x: 131.2,
+                y: 5.61,
+                r: 6.252831821
+              }]
+            }, {
+              label: ["Frankreich"],
+              backgroundColor: "rgba(154,205,50,0.2)",
+              borderColor: "rgba(154,205,50,1)",
+              data: [{
+                x: 98.5,
+                y: 5.59,
+                r: 6.23674806
+              }]
+            }, {
+              label: ["Deutschland"],
+              backgroundColor: "rgba(240,230,140,0.2)",
+              borderColor: "rgba(240,230,140,1)",
+              data: [{
+                x: 64.1,
+                y: 5.2,
+                r: 5.804227283
+              }]
+            }, {
+              label: ["Grossbritannien"],
+              backgroundColor: "rgba(255,140,0,0.2)",
+              borderColor: "rgba(255,140,0,1)",
+              data: [{
+                x: 87,
+                y: 5.03,
+                r: 5.612570636
+              }]
+            }, {
+              label: ["Kanada"],
+              backgroundColor: "rgba(255,218,185,0.2)",
+              borderColor: "rgba(255,218,185,1)",
+              data: [{
+                x: 89.7,
+                y: 3.25,
+                r: 3.622450381
+              }]
+            }, {
+              label: ["Spanien"],
+              backgroundColor: "rgba(255,174,185,0.2)",
+              borderColor: "rgba(255,174,185,1)",
+              data: [{
+                x: 96.7,
+                y: 2.79,
+                r: 3.116081604
+              }]
+            }, {
+              label: ["Südkorea"],
+              backgroundColor: "rgba(171,130,255,0.2)",
+              borderColor: "rgba(171,130,255,1)",
+              data: [{
+                x: 43.3,
+                y: 1.5,
+                r: 1.674746141
+              }]
+            }, {
+              label: ["Australien"],
               backgroundColor: "rgba(193,46,12,0.2)",
               borderColor: "rgba(193,46,12,1)",
               data: [{
-                x: 4931877,
-                y: 5.921,
-                r: 15
+                x: 47.1,
+                y: 1.46,
+                r: 1.626740037
               }]
             }
           ]
         },
         options: {
-          title: {
-            display: true,
-            text: 'Predicted world population (millions) in 2050'
-          }, scales: {
-            yAxes: [{
-              scaleLabel: {
-                display: true,
-                labelString: "Happiness"
-              }
-            }],
-            xAxes: [{
-              scaleLabel: {
-                display: true,
-                labelString: "GDP (PPP)"
-              }
-            }]
-          }
-        }
-    });
-
-  /* Graph2 */
-    new Chart(document.getElementById("mixed-chart"), {
-        type: 'bar',
-        data: {
-          labels: ["1900", "1950", "1999", "2050"],
-          datasets: [{
-              label: "Europe",
-              type: "line",
-              borderColor: "#8e5ea2",
-              data: [408,547,675,734],
-              fill: false
-            }, {
-              label: "Africa",
-              type: "line",
-              borderColor: "#3e95cd",
-              data: [133,221,783,2478],
-              fill: false
-            }, {
-              label: "Europe",
-              type: "bar",
-              backgroundColor: "rgba(0,0,0,0.2)",
-              data: [408,547,675,734],
-            }, {
-              label: "Africa",
-              type: "bar",
-              backgroundColor: "rgba(0,0,0,0.2)",
-              backgroundColorHover: "#3e95cd",
-              data: [133,221,783,2478]
+        title: {
+          display: false,
+          text: ''
+        }, scales: {
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "Prozentualer Schuldenanteil"
             }
-          ]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'Population growth (millions): Europe & Africa'
-          },
-          legend: { display: false }
+          }],
+          xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "Schulden/BIP-Verhältnis"
+            }
+          }]
         }
-    });
+      }
+  });
 
   </script>
 
