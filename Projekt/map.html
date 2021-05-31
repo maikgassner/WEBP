@@ -10,6 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    <!-- Highcharts imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/map.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/offline-exporting.js"></script>
+    <script src="https://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
     <title>WEBP Projekt TAMM</title>
   </head>
 
@@ -17,7 +25,7 @@
     <!-- HEADER NAV BAR -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #CCE5FF">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Weltweite Schulden-Blase</a>
+      <a class="navbar-brand" href="index.html">Schulden-Blase</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,10 +35,7 @@
             <a class="nav-link" aria-current="page" href="index.html">Startseite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="map.html">Weltkarte</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="live.html">Live Ticker</a>
+            <a class="nav-link active" href="map.html">USA-Karte</a>
           </li>
         </ul>
       </div>
@@ -39,497 +44,224 @@
 
   <!-- Start Seiteninhalt -->
   <div class="main-div">
-    <h1>Play with the map</h1>
-    <div id="chart-container"></div>
+    <h3>Schuldenübersicht der USA Bundesstaaten</h3>
+    <p>[Beschreibung einfügen]</p>
+    <div id="map-usa"></div>
   </div>
 
   <script>
-  const dataSource = {
-    chart: {
-      caption: "Average Annual Population Growth",
-      subcaption: "Click on a continent to see trend from 1955-2015",
-      numbersuffix: "%",
-      includevalueinlabels: "1",
-      labelsepchar: ": ",
-      entityfillhovercolor: "#FFF9C4",
-      theme: "fusion"
-    },
-    colorrange: {
-      minvalue: "0",
-      code: "#FFE0B2",
-      gradient: "1",
-      color: [
-        {
-          minvalue: "0.5",
-          maxvalue: "1.0",
-          color: "#FFD74D"
-        },
-        {
-          minvalue: "1.0",
-          maxvalue: "2.0",
-          color: "#FB8C00"
-        },
-        {
-          minvalue: "2.0",
-          maxvalue: "3.0",
-          color: "#E65100"
-        }
-      ]
-    },
-    data: [
-      {
-        id: "NA",
-        value: ".82",
-        showlabel: "1",
-        link: "newchart-json-NAM"
-      },
-      {
-        id: "SA",
-        value: "2.04",
-        showlabel: "1",
-        link: "newchart-json-SAM"
-      },
-      {
-        id: "AS",
-        value: "1.78",
-        showlabel: "1",
-        link: "newchart-json-ASI"
-      },
-      {
-        id: "EU",
-        value: ".40",
-        showlabel: "1",
-        link: "newchart-json-EUP"
-      },
-      {
-        id: "AF",
-        value: "2.58",
-        showlabel: "1",
-        link: "newchart-json-AFC"
-      },
-      {
-        id: "AU",
-        value: "1.30",
-        showlabel: "1",
-        link: "newchart-json-AUS"
-      }
-    ],
-    linkeddata: [
-      {
-        id: "NAM",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - North America",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            palettecolors: "FFD74D",
-            theme: "fusion"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "1.5078"
-            },
-            {
-              label: "1960",
-              value: "1.5502"
-            },
-            {
-              label: "1965",
-              value: "1.3121"
-            },
-            {
-              label: "1970",
-              value: "0.8648"
-            },
-            {
-              label: "1975",
-              value: "0.6402"
-            },
-            {
-              label: "1980",
-              value: "0.62"
-            },
-            {
-              label: "1985",
-              value: "0.6748"
-            },
-            {
-              label: "1990",
-              value: "0.6882"
-            },
-            {
-              label: "1995",
-              value: "0.6804"
-            },
-            {
-              label: "2000",
-              value: "0.5627"
-            },
-            {
-              label: "2005",
-              value: "0.5373"
-            },
-            {
-              label: "2010",
-              value: "0.5536"
-            },
-            {
-              label: "2015",
-              value: "0.4291"
-            }
-          ]
-        }
-      },
-      {
-        id: "SAM",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - South America",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            palettecolors: "E65100",
-            theme: "fusion"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "2.6275"
-            },
-            {
-              label: "1960",
-              value: "2.6995"
-            },
-            {
-              label: "1965",
-              value: "2.757"
-            },
-            {
-              label: "1970",
-              value: "2.5376"
-            },
-            {
-              label: "1975",
-              value: "2.3431"
-            },
-            {
-              label: "1980",
-              value: "2.3261"
-            },
-            {
-              label: "1985",
-              value: "2.2036"
-            },
-            {
-              label: "1990",
-              value: "1.9611"
-            },
-            {
-              label: "1995",
-              value: "1.7184"
-            },
-            {
-              label: "2000",
-              value: "1.5965"
-            },
-            {
-              label: "2005",
-              value: "1.4482"
-            },
-            {
-              label: "2010",
-              value: "1.2031"
-            },
-            {
-              label: "2015",
-              value: "1.0698"
-            }
-          ]
-        }
-      },
-      {
-        id: "ASI",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - Asia",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            theme: "fusion",
-            palettecolors: "FB8C00"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "1.9075"
-            },
-            {
-              label: "1960",
-              value: "1.8842"
-            },
-            {
-              label: "1965",
-              value: "2.1082"
-            },
-            {
-              label: "1970",
-              value: "2.4554"
-            },
-            {
-              label: "1975",
-              value: "2.3036"
-            },
-            {
-              label: "1980",
-              value: "1.9889"
-            },
-            {
-              label: "1985",
-              value: "1.9683"
-            },
-            {
-              label: "1990",
-              value: "2.0176"
-            },
-            {
-              label: "1995",
-              value: "1.6823"
-            },
-            {
-              label: "2000",
-              value: "1.3682"
-            },
-            {
-              label: "2005",
-              value: "1.2435"
-            },
-            {
-              label: "2010",
-              value: "1.1661"
-            },
-            {
-              label: "2015",
-              value: "1.0731"
-            }
-          ]
-        }
-      },
-      {
-        id: "EUP",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - Europe",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            theme: "fusion",
-            palettecolors: "FFE0B2"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "1.026"
-            },
-            {
-              label: "1960",
-              value: "1.0652"
-            },
-            {
-              label: "1965",
-              value: "0.9381"
-            },
-            {
-              label: "1970",
-              value: "0.6925"
-            },
-            {
-              label: "1975",
-              value: "0.54"
-            },
-            {
-              label: "1980",
-              value: "0.4218"
-            },
-            {
-              label: "1985",
-              value: "0.354"
-            },
-            {
-              label: "1990",
-              value: "0.2971"
-            },
-            {
-              label: "1995",
-              value: "0.0276"
-            },
-            {
-              label: "2000",
-              value: "-0.1301"
-            },
-            {
-              label: "2005",
-              value: "-0.1558"
-            },
-            {
-              label: "2010",
-              value: "-0.0576"
-            },
-            {
-              label: "2015",
-              value: "-0.0292"
-            }
-          ]
-        }
-      },
-      {
-        id: "AFC",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - Africa",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            theme: "fusion",
-            palettecolors: "E65100"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "2.1242"
-            },
-            {
-              label: "1960",
-              value: "2.338"
-            },
-            {
-              label: "1965",
-              value: "2.5075"
-            },
-            {
-              label: "1970",
-              value: "2.5947"
-            },
-            {
-              label: "1975",
-              value: "2.7175"
-            },
-            {
-              label: "1980",
-              value: "2.8398"
-            },
-            {
-              label: "1985",
-              value: "2.8857"
-            },
-            {
-              label: "1990",
-              value: "2.8243"
-            },
-            {
-              label: "1995",
-              value: "2.6172"
-            },
-            {
-              label: "2000",
-              value: "2.5072"
-            },
-            {
-              label: "2005",
-              value: "2.4853"
-            },
-            {
-              label: "2010",
-              value: "2.5593"
-            },
-            {
-              label: "2015",
-              value: "2.6001"
-            }
-          ]
-        }
-      },
-      {
-        id: "AUS",
-        linkedchart: {
-          chart: {
-            caption: "Average Annual Population Growth - Oceania",
-            subcaption: "1955 - 2015",
-            yaxisname: "Growth",
-            numbersuffix: "%",
-            theme: "fusion",
-            palettecolors: "FB8C00"
-          },
-          data: [
-            {
-              label: "1955",
-              value: "1.511"
-            },
-            {
-              label: "1960",
-              value: "1.6045"
-            },
-            {
-              label: "1965",
-              value: "1.5578"
-            },
-            {
-              label: "1970",
-              value: "1.455"
-            },
-            {
-              label: "1975",
-              value: "1.4727"
-            },
-            {
-              label: "1980",
-              value: "1.2404"
-            },
-            {
-              label: "1985",
-              value: "1.2398"
-            },
-            {
-              label: "1990",
-              value: "1.1853"
-            },
-            {
-              label: "1995",
-              value: "1.2006"
-            },
-            {
-              label: "2000",
-              value: "1.1244"
-            },
-            {
-              label: "2005",
-              value: "1.0724"
-            },
-            {
-              label: "2010",
-              value: "1.1255"
-            },
-            {
-              label: "2015",
-              value: "1.0397"
-            }
-          ]
-        }
-      }
-    ]
-    };
 
-    FusionCharts.ready(function() {
-    var myChart = new FusionCharts({
-      type: "maps/world",
-      renderAt: "chart-container",
-      width: "100%",
-      height: "100%",
-      dataFormat: "json",
-      dataSource
-    }).render();
+    Highcharts.seriesType('mappie', 'pie', {
+        center: null, // Can't be array by default anymore
+        clip: true, // For map navigation
+        states: {
+            hover: {
+                halo: {
+                    size: 5
+                }
+            }
+        },
+        linkedMap: null, //id of linked map
+        dataLabels: {
+            enabled: false
+        }
+    }, {
+        render: function () {
+            var series = this,
+                chart = series.chart,
+                linkedSeries = chart.get(series.options.linkedMap);
+        },
+        getCenter: function () {
+            var options = this.options,
+                chart = this.chart,
+                slicingRoom = 2 * (options.slicedOffset || 0);
+            if (!options.center) {
+                options.center = [null, null]; // Do the default here instead
+            }
+            // Handle lat/lon support
+            if (options.center.lat !== undefined) {
+                var point = chart.fromLatLonToPoint(options.center);
+                options.center = [
+                    chart.xAxis[0].toPixels(point.x, true) - chart.plotLeft,
+                    chart.yAxis[0].toPixels(point.y, true) - chart.plotTop
+                ];
+            }
+            // Handle dynamic size
+            if (options.sizeFormatter) {
+                options.size = options.sizeFormatter.call(this);
+            }
+            // Must correct for slicing room to get exact pixel pos
+            result[0] -= slicingRoom;
+            result[1] -= slicingRoom;
+            return result;
+        },
     });
+
+
+    var data = [
+            // state, depts, color
+            ['Alabama', "31,9 Mrd. $"],
+            ['Alaska', "9,7 Mrd. $"],
+            ['Arizona', "46,0 Mrd. $"],
+            ['Arkansas', "21,2 Mrd. $"],
+            ['California', "481,6 Mrd. $"],
+            ['Colorado', "63,5 Mrd. $"],
+            ['Connecticut', "55,6 Mrd. $"],
+            ['Delaware', "7,2 Mrd. $"],
+            ['District of Columbia', "18,5 Mrd. $"],
+            ['Florida', "116,5 Mrd. $"],
+            ['Georgia', "61,6 Mrd. $"],
+            ['Hawaii', "17,5 Mrd. $"],
+            ['Idaho', "6,0 Mrd. $"],
+            ['Illinois', "156,0 Mrd. $"],
+            ['Indiana', "52,5 Mrd. $"],
+            ['Iowa', "18,6 Mrd. $"],
+            ['Kansas', "32,8 Mrd. $"],
+            ['Kentucky', "53,7 Mrd. $"],
+            ['Louisiana', "34,6 Mrd. $"],
+            ['Maine', "8,1 Mrd. $"],
+            ['Maryland', "57,1 Mrd. $"],
+            ['Massachusetts', "99,1 Mrd. $"],
+            ['Michigan', "66,7 Mrd. $"],
+            ['Minnesota', "57,0 Mrd. $"],
+            ['Mississippi', "14,1 Mrd. $"],
+            ['Missouri', "42,8 Mrd. $"],
+            ['Montana', "5,4 Mrd. $"],
+            ['Nebraska', "17,6 Mrd. $"],
+            ['Nevada', "26,7 Mrd. $"],
+            ['New Hampshire', "10,0 Mrd. $"],
+            ['New Jersey', "91,2 Mrd. $"],
+            ['New Mexico', "16,2 Mrd. $"],
+            ['New York', "368,1 Mrd. $"],
+            ['North Carolina', "44,3 Mrd. $"],
+            ['North Dakota', "10,0 Mrd. $"],
+            ['Ohio', "75,6 Mrd. $"],
+            ['Oklahoma', "22,4 Mrd. $"],
+            ['Oregon', "46,1 Mrd. $"],
+            ['Pennsylvania', "128,2 Mrd. $"],
+            ['Rhode Island', "12,2 Mrd. $"],
+            ['South Carolina', "30,6 Mrd. $"],
+            ['South Dakota', "5,8 Mrd. $"],
+            ['Tennessee', "48,0 Mrd. $"],
+            ['Texas', "313,6 Mrd. $"],
+            ['Utah', "20,2 Mrd. $"],
+            ['Vermont', "4,6 Mrd. $"],
+            ['Virginia', "68,5 Mrd. $"],
+            ['Washington', "101,1 Mrd. $"],
+            ['West Virginia', "15,9 Mrd. $"],
+            ['Wisconsin', "46,9 Mrd. $"],
+            ['Wyoming', "2,1 Mrd. $"]
+        ],
+        maxVotes = 0;
+
+    // Compute max votes to find relative sizes of bubbles
+    Highcharts.each(data, function (row) {
+        maxVotes = Math.max(maxVotes, row[5]);
+    });
+
+    // Build the chart
+    var chart = Highcharts.mapChart('map-usa', {
+        title: {
+            text: ''
+        },
+
+        chart: {
+            animation: false // Disable animation, especially for zooming
+        },
+
+        mapNavigation: {
+            enabled: true
+        },
+        // Limit zoom range
+        yAxis: {
+            minRange: 2300
+        },
+
+        tooltip: {
+            useHTML: true
+        },
+
+        series: [{
+            mapData: Highcharts.maps['countries/us/us-all'],
+            data: data,
+            name: 'States',
+            borderColor: '#FFF',
+            showInLegend: false,
+            joinBy: ['name', 'id'],
+            keys: ['id', 'depts'],
+            tooltip: {
+                headerFormat: '',
+                pointFormatter: function () {
+                    var hoverVotes = this.hoverVotes; // Used by pie only
+                    return '<b>' + this.id + '</b>' + '</br>' + 'Schulden: ' + this.depts;
+                }
+            }
+        }]
+    });
+
+    // When clicking legend items, also toggle connectors and pies
+    Highcharts.each(chart.legend.allItems, function (item) {
+        var old = item.setVisible;
+        item.setVisible = function () {
+            var legendItem = this;
+            old.call(legendItem);
+            Highcharts.each(chart.series[0].points, function (point) {
+                if (chart.colorAxis[0].dataClasses[point.dataClass].name === legendItem.name) {
+                    // Find this state's pie and set visibility
+                    Highcharts.find(chart.series, function (item) {
+                        return item.name === point.id;
+                    }).setVisible(legendItem.visible, false);
+                    // Do the same for the connector point if it exists
+                    var connector = Highcharts.find(chart.series[2].points, function (item) {
+                        return item.name === point.id;
+                    });
+                    if (connector) {
+                        connector.setVisible(legendItem.visible, false);
+                    }
+                }
+            });
+            chart.redraw();
+        };
+    });
+
+    // Add the pies after chart load, optionally with offset and connectors
+    Highcharts.each(chart.series[0].points, function (state) {
+        if (!state.id) {
+            return; // Skip points with no data, if any
+        }
+
+        var pieOffset = state.pieOffset || {},
+            centerLat = parseFloat(state.properties.latitude),
+            centerLon = parseFloat(state.properties.longitude);
+
+        // Add the pie for this state
+        chart.addSeries({
+            type: 'mappie',
+            name: state.id,
+            linkedMap: 'us-all',
+            zIndex: 6, // Keep pies above connector lines
+            sizeFormatter: function () {
+                var yAxis = this.chart.yAxis[0],
+                    zoomFactor = (yAxis.dataMax - yAxis.dataMin) /
+                        (yAxis.max - yAxis.min);
+                return Math.max(
+                    this.chart.chartWidth / 45 * zoomFactor, // Min size
+                    this.chart.chartWidth / 11 * zoomFactor * state.sumVotes / maxVotes
+                );
+            },
+            tooltip: {
+                // Use the state tooltip for the pies as well
+                pointFormatter: function () {
+                    return state.series.tooltipOptions.pointFormatter.call({
+                        id: state.id,
+                        hoverVotes: this.name
+                    });
+                }
+            },
+        }, false);
+    });
+    chart.redraw();
+
   </script>
 
   <footer class="footer mt-auto py-3 bg-light" class="footer">
