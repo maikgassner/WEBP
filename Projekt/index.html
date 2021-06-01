@@ -30,7 +30,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Startseite</a>
+            <a class="nav-link active" aria-current="page" href="index.html">Global</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="europa.html">Europa</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="map.html">USA-Karte</a>
@@ -42,50 +45,23 @@
 
   <!-- Start Seiteninhalt -->
   <div class="main-div">
-    <h1>Unsere interaktive Übersicht der weltweiten Schulden</h1>
+    <h1>Übersicht der weltweiten Schulden</h1>
     <p>
-      Unsere interaktive Webseite die primär Grafiken enthält, soll die Bruttostaatsverschuldung für den gesamten Globus und die der einzelnen Länder zeigen. Unser Ziel ist es jedoch, dass die neuesten verfügbaren Daten verwendet werden und wir gehen davon aus, dass das Haushaltsjahr jeweils im Dezember endet. Da die Zahlen zur Verschuldung von nationalen Definitionen abgeleitet werden, können diese von Land zu Land variieren. Die Uhr soll die geschätzte Verschuldung zu dem Zeitpunkt anzeigen, die dem aktuellen Datum und der aktuellen Uhrzeit in dem vom Besucher betrachteten Jahr entspricht. Möchte du nur die Daten eines Landes, dann kann du diese entsprechend filtern und ein Land auswählen. Während auf der Y-Achse die Schulden angezeigt werden zeigt die X-Achse das Bruttoinlandsprodukt der jeweiligen Länder oder des jeweiligen Landes angezeigt.
+      Wie bereits erwartet haben sich die Staatsverschuldungen im Pandemiejahr 2020 massiv erhöht. Auch für die kommenden Jahre wird eine weitere Erhöhung der Schuldenquoten erwartet. Unsere interaktive Webseite, die Grafiken darstellt, soll die Bruttostaatsverschuldung für die höchstverschuldeten Ländern aufzeigen. Unser Ziel ist es, dass die neuesten verfügbaren Daten verwendet werden und wir gehen davon aus, dass das Haushaltsjahr jeweils im Dezember endet. Da die Zahlen zur Verschuldung von nationalen Definitionen abgeleitet werden, können diese von Land zu Land variieren. Möchte man nur die Daten eines bestimmten Landes, so kann man die Filterfunktion verwenden und die Länder entsprechend filtern.
     </p>
-
   </br>
 
-    <h3>Top 10 der höchstverschuldeten Länder Europas (in Miliarden) - Stand 2017 </h3>
-    <p>[Beschreibung einfügen]</p>
-    <div class="graph1">
-      <canvas id="polar-chart"></canvas>
-    </div>
-
-    <h3>Top 10 der höchstverschuldeten Länder weltweit (in Miliarden)</h3>
-    <p>[Beschreibung einfügen]</p>
-    <div class="graph2">
+    <h3>Top 10 der höchstverschuldeten Länder weltweit (in Mrd.)</h3>
+    <p>
+      Die folgende Grafik zeigt den prozentualen Schuldenanteil der Top 10 der höchstverschuldeten Länder weltweit in Relation zum Bruttoinlandsprodukt (BIP). Beim Ranking der höchsten Staatsverschuldung ist Europa häufig vertreten – die Spitzenpositionen belegen jedoch andere.
+    </p>
+    <div class="global-graph">
       <canvas id="bubble-chart"></canvas>
     </div>
   </div>
 
   <script>
-  /* Graph1 */
-  new Chart(document.getElementById("polar-chart"), {
-  type: 'polarArea',
-  data: {
-    labels: ["Griechenland", "Italien", "Portugal", "Belgien", "Spanien", "Zypern", "Frankreich", "Grossbritannien", "Österreich", "Kroatien"],
-    datasets: [
-      {
-        label: " ",
-        backgroundColor: ["#B0E2FF", "#4876ff","#f4a460","#9acd32","#f0e68c","#ff8c00","#ffdab9","#ffa500","#ffaeb9","#ab82ff"],
-        data: [181.8,131.8,125.7,103.4,98.4,97.5,96.8,87.5,78.6,77.8]
-      }
-    ]
-  },
-  options: {
-    title: {
-      display: false,
-      text: ''
-    }
-  }
-  });
-
-
-  /* Graph2 */
+  /* Graph weltweit */
     new Chart(document.getElementById("bubble-chart"), {
         type: 'bubble',
         data: {
